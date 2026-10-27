@@ -1,0 +1,27 @@
+[project]
+name = "project-apex"
+version = "0.1.0"
+description = "Open-source TypeDB demonstration: a fictional £2.4bn acquisition"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.13"
+dependencies = [
+    "typedb-driver==3.14.0",
+    "pydantic-settings>=2.11",
+    "pyyaml>=6.0.2",
+    "fastapi>=0.162.0",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "httpx2>=2.16.0",
+    "pytest>=8",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]
+# Deprecation warnings fail the tests so they get fixed promptly; the SyntaxWarning is
+# harmless and comes from inside typedb-driver 3.14.0's own code.
+filterwarnings = ["error::DeprecationWarning", "ignore::SyntaxWarning"]
